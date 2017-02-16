@@ -1,5 +1,5 @@
-hash: 903aa052a1871c6bac18b034bf05975da5eb1566b70b4a8a2a05a24eefb5ee8d
-updated: 2017-02-16T12:14:53.954491575+05:30
+hash: 28c0f92b5ce0a66cf89d598f919ce3218f0507bc4ae872ecd282ead86d6ff627
+updated: 2017-02-16T19:18:19.850892311+05:30
 imports:
 - name: github.com/fatih/structs
   version: a720dfa8df582c51dee1b36feabb906bde1588bd
@@ -37,6 +37,7 @@ imports:
 - name: github.com/iris-contrib/middleware
   version: eff973db50aaea60190e75f8f5dc343f7de34b38
   subpackages:
+  - cors
   - logger
   - recovery
 - name: github.com/kataras/go-errors
@@ -98,6 +99,7 @@ imports:
   - acme
   - acme/autocert
   - ocsp
+  - sha3
 - name: golang.org/x/net
   version: b4690f45fa1cafc47b1c280c2e75116efe40cc13
   subpackages:

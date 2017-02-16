@@ -10,4 +10,5 @@ import:
   version: ^5.0.0
   subpackages:
   - logger
+  - cors
 - package: github.com/olebedev/config
