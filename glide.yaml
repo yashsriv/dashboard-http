@@ -10,3 +10,4 @@ import:
   version: ^5.0.0
   subpackages:
   - logger
+- package: github.com/olebedev/config

@@ -1,5 +1,5 @@
-hash: 07985f2fa8741fe07b02206c242a65871f2429b656cc214fe4c3aa3b0737e4e2
-updated: 2017-02-16T11:08:11.110047134+05:30
+hash: 903aa052a1871c6bac18b034bf05975da5eb1566b70b4a8a2a05a24eefb5ee8d
+updated: 2017-02-16T12:14:53.954491575+05:30
 imports:
 - name: github.com/fatih/structs
   version: a720dfa8df582c51dee1b36feabb906bde1588bd
@@ -38,6 +38,7 @@ imports:
   version: eff973db50aaea60190e75f8f5dc343f7de34b38
   subpackages:
   - logger
+  - recovery
 - name: github.com/kataras/go-errors
   version: 0f977b82cc78d5d31bb75fb6f903ad9e852c8bbd
 - name: github.com/kataras/go-fs
@@ -75,6 +76,8 @@ imports:
   version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
 - name: github.com/miekg/dns
   version: 5a15a35f5f671cf6ad8b316b50607c76e5e87fb6
+- name: github.com/olebedev/config
+  version: afea898d27c7d17376ecc60c7c2e73c76b40060e
 - name: github.com/russross/blackfriday
   version: 5f33e7b7878355cd2b7e6b8eefc48a5472c69f70
 - name: github.com/shurcooL/sanitized_anchor_name
@@ -122,4 +125,6 @@ imports:
   subpackages:
   - cipher
   - json
+- name: gopkg.in/yaml.v2
+  version: a3f3340b5840cee44f372bddb5880fcbc419b46a
 testImports: []
