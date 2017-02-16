@@ -1,0 +1,12 @@
+package: github.com/yashsriv/dashboard-http
+import:
+- package: github.com/kataras/iris
+  version: ^5.0.0
+- package: github.com/square/go-jose
+  version: ^2.0.1
+- package: gopkg.in/square/go-jose.v1
+  version: ^2.0.1
+- package: github.com/iris-contrib/middleware
+  version: ^5.0.0
+  subpackages:
+  - logger
