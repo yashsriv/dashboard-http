@@ -4,10 +4,11 @@ import (
 	"gopkg.in/kataras/iris.v5"
 )
 
+// DashboardRoute - Function to set up Iris Router
 func DashboardRoute() {
 
 	iris.Get("/", func(ctx *iris.Context) {
-		ctx.Text(iris.StatusAccepted, "")
+		_ = ctx.Text(iris.StatusAccepted, "")
 	})
 
 }
