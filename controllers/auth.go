@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/jlaffaye/ftp"
 	"github.com/olebedev/config"
 	"golang.org/x/crypto/sha3"
 	"gopkg.in/kataras/iris.v5"
@@ -69,7 +70,16 @@ func getSecret() string {
 }
 
 func (lj *loginJSON) verifyLoginInfo() bool {
-	// TODO: Contact actual server
+	conn, err := ftp.Dial("webhome.cc.iitk.ac.in:21")
+	if err != nil {
+		panic(err)
+	}
+	err = conn.Login(lj.Username, lj.Password)
+	if err != nil {
+		iris.Logger.Println(err)
+		return false
+	}
+	_ = conn.Logout()
 	return true
 }
 

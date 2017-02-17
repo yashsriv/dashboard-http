@@ -12,3 +12,4 @@ import:
   - logger
   - cors
 - package: github.com/olebedev/config
+- package: github.com/jlaffaye/ftp

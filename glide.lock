@@ -1,5 +1,5 @@
-hash: 28c0f92b5ce0a66cf89d598f919ce3218f0507bc4ae872ecd282ead86d6ff627
-updated: 2017-02-16T19:18:19.850892311+05:30
+hash: 1f6ab6a05f19e2e2a06c92148e6a31d89eafe377296c01fb4d8911eb698f24ad
+updated: 2017-02-17T11:20:58.806243892+05:30
 imports:
 - name: github.com/fatih/structs
   version: a720dfa8df582c51dee1b36feabb906bde1588bd
@@ -40,6 +40,8 @@ imports:
   - cors
   - logger
   - recovery
+- name: github.com/jlaffaye/ftp
+  version: de604c9776d421c5f4844956693a408566ef854a
 - name: github.com/kataras/go-errors
   version: 0f977b82cc78d5d31bb75fb6f903ad9e852c8bbd
 - name: github.com/kataras/go-fs
