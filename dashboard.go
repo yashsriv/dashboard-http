@@ -16,6 +16,8 @@ import (
 func main() {
 
 	iris.Config.Gzip = true
+	iris.Config.LoggerPreffix = "[dashboard-http] "
+
 	iris.Use(logger.New())
 	iris.Use(recovery.New())
 	iris.Use(cors.Default())
