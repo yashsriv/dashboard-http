@@ -4,12 +4,12 @@ package main
 import (
 	"fmt"
 
+	"github.com/yashsriv/dashboard-http/config"
 	"github.com/yashsriv/dashboard-http/router"
 
 	"github.com/iris-contrib/middleware/cors"
 	"github.com/iris-contrib/middleware/logger"
 	"github.com/iris-contrib/middleware/recovery"
-	"github.com/olebedev/config"
 	"gopkg.in/kataras/iris.v5"
 )
 
@@ -25,21 +25,11 @@ func main() {
 	// log http errors
 	iris.OnError(iris.StatusNotFound, myCorsMiddleware)
 
+	config.InitConfig()
+
 	router.DashboardRoute()
 
-	cfg, err := config.ParseYamlFile("./config.yml")
-	if err != nil {
-		panic(err)
-	}
-	cfg.EnvPrefix("DASHBOARD")
-
-	// Can be set using DASHBOARD_HTTP_PORT environment variable
-	port, err := cfg.Int("http.port")
-	if err != nil {
-		panic(err)
-	}
-
-	iris.Listen(fmt.Sprintf(":%d", port))
+	iris.Listen(fmt.Sprintf(":%d", config.HTTPPort))
 
 }
 
@@ -49,13 +39,14 @@ func myCorsMiddleware(ctx *iris.Context) {
 	if ctx.MethodString() == "OPTIONS" {
 		ctx.SetHeader("Access-Control-Allow-Origin", "*")
 		ctx.SetHeader("Access-Control-Allow-Headers", "content-type")
-		err := ctx.Text(200, "")
+		err := ctx.Text(iris.StatusOK, "")
 		if err != nil {
 			panic(err)
 		}
 	} else {
 		errorLogger := logger.New()
 		errorLogger.Serve(ctx)
+		_ = ctx.Text(iris.StatusNotFound, "")
 	}
 
 }

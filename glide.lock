@@ -1,6 +1,8 @@
-hash: 1f6ab6a05f19e2e2a06c92148e6a31d89eafe377296c01fb4d8911eb698f24ad
-updated: 2017-02-17T11:20:58.806243892+05:30
+hash: 713847097c90f2c5ee68c85d897780ee4cc93ed1c8e46c7e89ebf2404c5475d6
+updated: 2017-03-18T17:35:07.997495518+05:30
 imports:
+- name: github.com/daviddengcn/go-colortext
+  version: 805cee6e0d43c72ba1d4e3275965ff41e0da068a
 - name: github.com/fatih/structs
   version: a720dfa8df582c51dee1b36feabb906bde1588bd
 - name: github.com/geekypanda/httpcache
@@ -12,6 +14,8 @@ imports:
   - internal/nethttp
   - internal/nethttp/rule
   - internal/server
+- name: github.com/go-sql-driver/mysql
+  version: 2e00b5cd70399450106cec6431c2e2ce3cae5034
 - name: github.com/google/go-github
   version: dfd20fd7fa6edec56447fcb049acd5e17a78ec2e
   subpackages:
@@ -41,7 +45,11 @@ imports:
   - logger
   - recovery
 - name: github.com/jlaffaye/ftp
-  version: de604c9776d421c5f4844956693a408566ef854a
+  version: 7b85eb4638a2c0473acefcfb929a98f879c15c86
+- name: github.com/jmoiron/sqlx
+  version: 8ed836a8adb659e8492bcaa49e0880bb84075fe2
+  subpackages:
+  - reflectx
 - name: github.com/kataras/go-errors
   version: 0f977b82cc78d5d31bb75fb6f903ad9e852c8bbd
 - name: github.com/kataras/go-fs
@@ -64,7 +72,7 @@ imports:
   subpackages:
   - html
 - name: github.com/kataras/iris
-  version: 547c5360493789dc4f0e65894f14af086c62d03c
+  version: c598e7bee38a260b7173418a33281bf1a9f91aab
 - name: github.com/klauspost/compress
   version: 461e8fd8397ae84a23f56e385801e4feda2048ce
   subpackages:
@@ -75,18 +83,83 @@ imports:
   version: 09cded8978dc9e80714c4d85b0322337b0a1e5e0
 - name: github.com/klauspost/crc32
   version: 1bab8b35b6bb565f92cbc97939610af9369f942a
+- name: github.com/lib/pq
+  version: 472a0745531a17dbac346e828b4c60e73ddff30c
+  subpackages:
+  - oid
+- name: github.com/markbates/going
+  version: 0576708c56cea02331f864fe6e157ac7841923e4
+  subpackages:
+  - defaults
+  - randx
+  - wait
+- name: github.com/markbates/inflect
+  version: 3e74c98c9bcf4148db59b58e94ba545314ae9f61
+- name: github.com/markbates/pop
+  version: 0af627d5b61c8bb729ca7cbc5daaa296c4e4fb8a
+  subpackages:
+  - '...'
+  - columns
+  - fizz
+  - fizz/translators
+- name: github.com/markbates/validate
+  version: 45e9150718f6ce4de57a29f3968458cb74f9f312
+  subpackages:
+  - validators
+- name: github.com/mattn/anko
+  version: bbb27a2b2841493a96350331a89f2199ddafc651
+  subpackages:
+  - ast
+  - builtins
+  - builtins/encoding/json
+  - builtins/errors
+  - builtins/flag
+  - builtins/fmt
+  - builtins/github.com/daviddengcn/go-colortext
+  - builtins/io
+  - builtins/io/ioutil
+  - builtins/math
+  - builtins/math/big
+  - builtins/math/rand
+  - builtins/net
+  - builtins/net/http
+  - builtins/net/url
+  - builtins/os
+  - builtins/os/exec
+  - builtins/os/signal
+  - builtins/path
+  - builtins/path/filepath
+  - builtins/regexp
+  - builtins/runtime
+  - builtins/sort
+  - builtins/strings
+  - builtins/time
+  - parser
+  - vm
+- name: github.com/mattn/go-sqlite3
+  version: eac1dfa2a61ebccaa117538a5bb12044f6700cd0
 - name: github.com/microcosm-cc/bluemonday
   version: e79763773ab6222ca1d5a7cbd9d62d83c1f77081
 - name: github.com/miekg/dns
   version: 5a15a35f5f671cf6ad8b316b50607c76e5e87fb6
+- name: github.com/moul/http2curl
+  version: 4e24498b31dba4683efb9d35c1c8a91e2eda28c8
 - name: github.com/olebedev/config
   version: afea898d27c7d17376ecc60c7c2e73c76b40060e
+- name: github.com/parnurzeal/gorequest
+  version: a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3
+- name: github.com/pkg/errors
+  version: ff09b135c25aae272398c51a07235b90a75aa4f0
 - name: github.com/russross/blackfriday
   version: 5f33e7b7878355cd2b7e6b8eefc48a5472c69f70
+- name: github.com/satori/go.uuid
+  version: b061729afc07e77a8aa4fad0a2fd840958f1942a
+- name: github.com/serenize/snaker
+  version: 543781d2b79bd95c51ffe70e70a55c946ca211ff
 - name: github.com/shurcooL/sanitized_anchor_name
   version: 1dba4b3954bc059efc3991ec364f9f9a35f597d2
 - name: github.com/square/go-jose
-  version: 296c7f1463ec9b712176dc804dea0173d06dc728
+  version: d5683d954d08cd430460c651e2a2fff4f3b39f86
 - name: github.com/valyala/bytebufferpool
   version: e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7
 - name: github.com/valyala/fasthttp
@@ -119,11 +192,11 @@ imports:
 - name: gopkg.in/kataras/go-websocket.v0
   version: 92bcac17911011e7fb01a8905b9c19c0402dfc9d
 - name: gopkg.in/kataras/iris.v5
-  version: 547c5360493789dc4f0e65894f14af086c62d03c
+  version: c598e7bee38a260b7173418a33281bf1a9f91aab
   subpackages:
   - utils
 - name: gopkg.in/square/go-jose.v1
-  version: 296c7f1463ec9b712176dc804dea0173d06dc728
+  version: d5683d954d08cd430460c651e2a2fff4f3b39f86
 - name: gopkg.in/square/go-jose.v2
   version: 296c7f1463ec9b712176dc804dea0173d06dc728
   subpackages:

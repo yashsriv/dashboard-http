@@ -9,14 +9,9 @@ import (
 // DashboardRoute - Function to set up Iris Router
 func DashboardRoute() {
 
-	iris.Get("/", func(ctx *iris.Context) {
-		_ = ctx.Text(iris.StatusAccepted, "")
-	})
-
-	iris.Get("/user/me", controllers.IsAuthenticated, func(ctx *iris.Context) {
-		_ = ctx.JSON(iris.StatusOK, iris.Map{"username": ctx.GetCookie("username")})
-	})
-
-	iris.Post("/user/login", controllers.Login)
+	user := iris.Party("/user")
+	user.Get("/me", controllers.IsAuthenticated, controllers.CurrentUser)
+	user.Post("/login", controllers.Login)
+	user.Post("/facebook", controllers.IsAuthenticated, controllers.AddFacebook)
 
 }

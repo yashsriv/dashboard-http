@@ -1,0 +1,21 @@
+development:
+  dialect: postgres
+  database: dashboard-http_development
+  user: postgres
+  password: postgres
+  host: 127.0.0.1
+  pool: 5
+
+test:
+  dialect: postgres
+  database: dashboard-http_test
+  user: postgres
+  password: postgres
+  host: 127.0.0.1
+
+production:
+  dialect: postgres
+  database: {{envOr "DATABASE_NAME" "dashboard-http"}}
+  user: {{envOr "DATABASE_USER" "postgres"}}
+  password: {{envOr "DATABASE_PASSWORD" "postgres"}}
+  host: {{envOr "DATABASE_HOST" "127.0.0.1"}}

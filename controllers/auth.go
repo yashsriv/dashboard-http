@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/yashsriv/dashboard-http/config"
+	"github.com/yashsriv/dashboard-http/models"
+
 	"github.com/jlaffaye/ftp"
-	"github.com/olebedev/config"
 	"golang.org/x/crypto/sha3"
 	"gopkg.in/kataras/iris.v5"
 )
@@ -28,6 +30,24 @@ func IsAuthenticated(ctx *iris.Context) {
 	}
 }
 
+// CurrentUser fetches info of current user
+func CurrentUser(ctx *iris.Context) {
+	username := ctx.GetCookie("username")
+	var users []models.User
+	err := config.DatabaseConnection.Q().
+		Where("username = ?", username).
+		All(&users)
+	if err != nil {
+		SendInternalServer(err, ctx)
+		return
+	}
+	if len(users) > 0 {
+		_ = ctx.JSON(iris.StatusOK, users[0])
+	} else {
+		_ = ctx.Text(iris.StatusNotFound, "")
+	}
+}
+
 type loginJSON struct {
 	Username string `json:"username" xml:"username" form:"username"`
 	Password string `json:"password" xml:"password" form:"password"`
@@ -41,9 +61,28 @@ func Login(ctx *iris.Context) {
 		_ = ctx.Text(iris.StatusBadRequest, err.Error())
 	} else {
 		if loginInfo.verifyLoginInfo() {
+			var user models.User
+			var users []models.User
+			err := config.DatabaseConnection.Q().
+				Where("username = ?", loginInfo.Username).
+				All(&users)
+			if err != nil {
+				SendInternalServer(err, ctx)
+				return
+			}
+			if len(users) > 0 {
+				user = users[0]
+			} else {
+				user = models.User{Username: loginInfo.Username}
+				err = config.DatabaseConnection.Create(&user)
+				if err != nil {
+					SendInternalServer(err, ctx)
+					return
+				}
+			}
 			username := loginInfo.Username
 			timestamp := fmt.Sprintf("%d", time.Now().Unix())
-			secret := getSecret()
+			secret := config.CookieSecret
 			hashValue := []byte(username + ":" + timestamp + ":" + secret)
 			hasher := sha3.New256()
 			hasher.Write(hashValue)
@@ -51,22 +90,11 @@ func Login(ctx *iris.Context) {
 			ctx.SetCookieKV("username", username)
 			ctx.SetCookieKV("timestamp", timestamp)
 			ctx.SetCookieKV("auth", sha)
-			_ = ctx.Text(iris.StatusOK, "")
+			_ = ctx.JSON(iris.StatusOK, user)
 		} else {
 			_ = ctx.Text(iris.StatusNotFound, "")
 		}
 	}
-}
-
-func getSecret() string {
-
-	cfg, _ := config.ParseYamlFile("config.yml")
-	cfg.EnvPrefix("DASHBOARD")
-
-	// Can be set using DASHBOARD_SECRET_VALUE environment variable
-	secret, _ := cfg.String("secret.value")
-	return secret
-
 }
 
 func (lj *loginJSON) verifyLoginInfo() bool {
@@ -74,17 +102,18 @@ func (lj *loginJSON) verifyLoginInfo() bool {
 	if err != nil {
 		panic(err)
 	}
+	defer conn.Quit()
 	err = conn.Login(lj.Username, lj.Password)
+	defer conn.Logout()
 	if err != nil {
 		iris.Logger.Println(err)
 		return false
 	}
-	_ = conn.Logout()
 	return true
 }
 
 func checkHash(username string, timestamp string, auth string) bool {
-	secret := getSecret()
+	secret := config.CookieSecret
 	hashValue := []byte(username + ":" + timestamp + ":" + secret)
 	hasher := sha3.New256()
 	hasher.Write(hashValue)

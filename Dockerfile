@@ -5,8 +5,11 @@ MAINTAINER Yash Srivastav
 RUN curl https://glide.sh/get | sh
 
 ENV GOPATH /go
+ENV GO_ENV production
 RUN mkdir -p $GOPATH/src
 RUN mkdir -p $GOPATH/bin
+RUN go get github.com/markbates/pop/...
+RUN go install github.com/markbates/pop/soda
 
 ENV SRCPATH /go/src/github.com/yashsriv/dashboard-http
 RUN mkdir -p $SRCPATH
@@ -26,4 +29,4 @@ RUN cd $SRCPATH && go install
 
 EXPOSE 8080
 
-ENTRYPOINT ["/go/bin/dashboard-http"]
+ENTRYPOINT ["/go/src/github.com/yashsriv/dashboard-http/run.sh"]
