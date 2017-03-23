@@ -1,5 +1,5 @@
-hash: 713847097c90f2c5ee68c85d897780ee4cc93ed1c8e46c7e89ebf2404c5475d6
-updated: 2017-03-18T17:35:07.997495518+05:30
+hash: e0a9ae88264c1f3ee9776224fc284db763481cb028722895a220d90fa83ea81f
+updated: 2017-03-23T21:32:27.61527188+05:30
 imports:
 - name: github.com/daviddengcn/go-colortext
   version: 805cee6e0d43c72ba1d4e3275965ff41e0da068a
@@ -96,7 +96,7 @@ imports:
 - name: github.com/markbates/inflect
   version: 3e74c98c9bcf4148db59b58e94ba545314ae9f61
 - name: github.com/markbates/pop
-  version: 0af627d5b61c8bb729ca7cbc5daaa296c4e4fb8a
+  version: 12f7df8d5dc23214fccbd548cfde835159bf17de
   subpackages:
   - '...'
   - columns
@@ -168,6 +168,8 @@ imports:
   - fasthttpadaptor
   - fasthttputil
   - stackless
+- name: github.com/ybbus/jsonrpc
+  version: 1846c13ee8bfa0855008fa32dfb161e6808890ee
 - name: golang.org/x/crypto
   version: 453249f01cfeb54c3d549ddb75ff152ca243f9d8
   subpackages:

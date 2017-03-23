@@ -14,4 +14,7 @@ func DashboardRoute() {
 	user.Post("/login", controllers.Login)
 	user.Post("/facebook", controllers.IsAuthenticated, controllers.AddFacebook)
 
+	share := iris.Party("/share")
+	share.Get("/get", controllers.GetPosts)
+
 }

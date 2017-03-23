@@ -19,3 +19,4 @@ import:
   version: ^3.12.1
   subpackages:
   - '...'
+- package: github.com/ybbus/jsonrpc

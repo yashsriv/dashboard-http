@@ -5,6 +5,7 @@ import (
 
 	"github.com/markbates/pop"
 	"github.com/olebedev/config"
+	"github.com/ybbus/jsonrpc"
 )
 
 // HTTPPort on which server should listen
@@ -18,6 +19,12 @@ var DatabaseConnection *pop.Connection
 
 // FacebookAccessToken is the secret app access token
 var FacebookAccessToken string
+
+// Timetable rpc client
+var Timetable *jsonrpc.RPCClient
+
+// Share
+var Share *jsonrpc.RPCClient
 
 // InitConfig for setting up config
 func InitConfig() {
@@ -65,4 +72,17 @@ func InitConfig() {
 
 	FacebookAccessToken = fmt.Sprintf("%s|%s", facebookAppID, facebookAppSecret)
 
+	shareHost, err := cfg.String("share.host")
+	if err != nil {
+		panic(err)
+	}
+
+	// Can be set using DASHBOARD_SHARE_PORT environment variable
+
+	sharePort, err := cfg.String("share.port")
+	if err != nil {
+		panic(err)
+	}
+
+	Share = jsonrpc.NewRPCClient(fmt.Sprintf("http://%s:%s/jrpc", shareHost, sharePort))
 }

@@ -6,3 +6,6 @@ database: "production"
 facebook:
   appid: ""
   secret: ""
+share:
+  host: ""
+  port: ""
