@@ -9,3 +9,6 @@ facebook:
 share:
   host: ""
   port: ""
+timetable:
+  host: ""
+  port: ""

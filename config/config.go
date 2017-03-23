@@ -85,4 +85,19 @@ func InitConfig() {
 	}
 
 	Share = jsonrpc.NewRPCClient(fmt.Sprintf("http://%s:%s/jrpc", shareHost, sharePort))
+
+	// Can be set using DASHBOARD_TIMETABLE_HOST environment variable
+	timetableHost, err := cfg.String("timetable.host")
+	if err != nil {
+		panic(err)
+	}
+
+	// Can be set using DASHBOARD_TIMETABLE_PORT environment variable
+	timetablePort, err := cfg.String("timetable.port")
+	if err != nil {
+		panic(err)
+	}
+
+	Timetable = jsonrpc.NewRPCClient(fmt.Sprintf("http://%s:%s/", timetableHost, timetablePort))
+
 }

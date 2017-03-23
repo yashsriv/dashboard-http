@@ -17,4 +17,8 @@ func DashboardRoute() {
 	share := iris.Party("/share")
 	share.Get("/get", controllers.GetPosts)
 
+	timetable := iris.Party("/timetable")
+	timetable.Post("/add", controllers.AddToTimeTable)
+	timetable.Get("/get", controllers.GetFromTimeTable)
+
 }
