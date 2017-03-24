@@ -53,6 +53,17 @@ type loginJSON struct {
 	Password string `json:"password" xml:"password" form:"password"`
 }
 
+type loginAuth struct {
+	Username  string `json:"username"`
+	Timestamp string `json:"timestamp"`
+	Auth      string `json:"auth"`
+}
+
+type loginResponse struct {
+	User models.User `json:"user"`
+	Auth loginAuth   `json:"auth"`
+}
+
 // Login sets the login cookie if successful
 func Login(ctx *iris.Context) {
 	loginInfo := loginJSON{}
@@ -87,10 +98,12 @@ func Login(ctx *iris.Context) {
 			hasher := sha3.New256()
 			hasher.Write(hashValue)
 			sha := base64.URLEncoding.EncodeToString(hasher.Sum(nil))
-			ctx.SetHeader("X-Username-Header", username)
-			ctx.SetHeader("X-Timestamp-Header", timestamp)
-			ctx.SetHeader("X-Auth-Header", sha)
-			_ = ctx.JSON(iris.StatusOK, user)
+			auth := loginAuth{
+				Username:  username,
+				Timestamp: timestamp,
+				Auth:      sha,
+			}
+			_ = ctx.JSON(iris.StatusOK, loginResponse{User: user, Auth: auth})
 		} else {
 			_ = ctx.Text(iris.StatusNotFound, "")
 		}
