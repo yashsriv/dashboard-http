@@ -43,7 +43,7 @@ type TimeTableAddEvent struct {
 
 // GetFromTimeTable gets entry from time table
 func GetFromTimeTable(ctx *iris.Context) {
-	username := ctx.GetCookie("username")
+	username := ctx.RequestHeader("X-Username-Header")
 	start := ctx.URLParam("start")
 	end := ctx.URLParam("end")
 	response, err := config.Timetable.Call("Timetable.get", TimeTableRequest{
@@ -76,7 +76,7 @@ type status struct {
 
 // AddToTimeTable adds event to the timetable
 func AddToTimeTable(ctx *iris.Context) {
-	username := ctx.GetCookie("username")
+	username := ctx.RequestHeader("X-Username-Header")
 
 	event := CalendarAddEvent{}
 	err := ctx.ReadJSON(&event)

@@ -27,7 +27,7 @@ type fbResponseData struct {
 
 // AddFacebook adds user's facebook access token
 func AddFacebook(ctx *iris.Context) {
-	username := ctx.GetCookie("username")
+	username := ctx.RequestHeader("X-Username-Header")
 	fbInfo := fbJSON{}
 	err := ctx.ReadJSON(&fbInfo)
 	if err != nil {

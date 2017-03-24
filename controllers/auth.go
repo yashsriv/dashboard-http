@@ -15,9 +15,9 @@ import (
 
 // IsAuthenticated checks whether user is authenticated
 func IsAuthenticated(ctx *iris.Context) {
-	username := ctx.GetCookie("username")
-	timestamp := ctx.GetCookie("timestamp")
-	auth := ctx.GetCookie("auth")
+	username := ctx.RequestHeader("X-Username-Header")
+	timestamp := ctx.RequestHeader("X-Timestamp-Header")
+	auth := ctx.RequestHeader("X-Auth-Header")
 
 	if username == "" || timestamp == "" || auth == "" {
 		_ = ctx.Text(iris.StatusUnauthorized, "Unauthorised")
@@ -32,7 +32,7 @@ func IsAuthenticated(ctx *iris.Context) {
 
 // CurrentUser fetches info of current user
 func CurrentUser(ctx *iris.Context) {
-	username := ctx.GetCookie("username")
+	username := ctx.RequestHeader("X-Username-Header")
 	var users []models.User
 	err := config.DatabaseConnection.Q().
 		Where("username = ?", username).
@@ -87,9 +87,9 @@ func Login(ctx *iris.Context) {
 			hasher := sha3.New256()
 			hasher.Write(hashValue)
 			sha := base64.URLEncoding.EncodeToString(hasher.Sum(nil))
-			ctx.SetCookieKV("username", username)
-			ctx.SetCookieKV("timestamp", timestamp)
-			ctx.SetCookieKV("auth", sha)
+			ctx.SetHeader("X-Username-Header", username)
+			ctx.SetHeader("X-Timestamp-Header", timestamp)
+			ctx.SetHeader("X-Auth-Header", sha)
 			_ = ctx.JSON(iris.StatusOK, user)
 		} else {
 			_ = ctx.Text(iris.StatusNotFound, "")
