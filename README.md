@@ -1,12 +1,5 @@
 # dashboard-http
-Http + Authentication Service for Dashboard
 
-Install Glide
+Http + Authentication Service for Dashboard, IIT Kanpur
 
-Needed for glide:
-```
-git config --global http.followRedirects true
-```
-
-`glide install`
 
