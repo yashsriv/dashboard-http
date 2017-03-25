@@ -2,9 +2,11 @@ package controllers
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"time"
 
+	"github.com/parnurzeal/gorequest"
 	"github.com/yashsriv/dashboard-http/config"
 	"github.com/yashsriv/dashboard-http/models"
 
@@ -84,11 +86,24 @@ func Login(ctx *iris.Context) {
 			if len(users) > 0 {
 				user = users[0]
 			} else {
-				user = models.User{Username: loginInfo.Username}
-				err = config.DatabaseConnection.Create(&user)
-				if err != nil {
-					SendInternalServer(err, ctx)
-					return
+				request := gorequest.New().Get("https://search.pclub.in/api/student").
+					Param("username", loginInfo.Username)
+
+				resp, body, errs := request.End()
+				if errs != nil {
+					SendInternalServer(errs[0], ctx)
+				}
+				if resp.StatusCode == 200 {
+					err = json.Unmarshal([]byte(body), &user)
+					if err != nil {
+						SendInternalServer(err, ctx)
+						return
+					}
+					err = config.DatabaseConnection.Create(&user)
+					if err != nil {
+						SendInternalServer(err, ctx)
+						return
+					}
 				}
 			}
 			username := loginInfo.Username
