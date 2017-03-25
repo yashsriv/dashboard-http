@@ -3,6 +3,11 @@ http:
 secret:
   value: "passhash"
 database: "production"
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""
+  db: 0
 facebook:
   appid: ""
   secret: ""
@@ -12,3 +17,5 @@ share:
 timetable:
   host: ""
   port: ""
+weather:
+  key: ""

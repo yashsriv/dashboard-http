@@ -1,5 +1,5 @@
-hash: e0a9ae88264c1f3ee9776224fc284db763481cb028722895a220d90fa83ea81f
-updated: 2017-03-23T21:32:27.61527188+05:30
+hash: 2054dc860d6d1d14b95f711f3cbb7941213766d274dcd23439a9bb82e8b20625
+updated: 2017-03-25T22:59:38.246101464+05:30
 imports:
 - name: github.com/daviddengcn/go-colortext
   version: 805cee6e0d43c72ba1d4e3275965ff41e0da068a
@@ -14,6 +14,8 @@ imports:
   - internal/nethttp
   - internal/nethttp/rule
   - internal/server
+- name: github.com/go-redis/redis
+  version: 2cf5af9928978bbef8d1076607022403439e177c
 - name: github.com/go-sql-driver/mysql
   version: 2e00b5cd70399450106cec6431c2e2ce3cae5034
 - name: github.com/google/go-github
@@ -96,7 +98,7 @@ imports:
 - name: github.com/markbates/inflect
   version: 3e74c98c9bcf4148db59b58e94ba545314ae9f61
 - name: github.com/markbates/pop
-  version: 12f7df8d5dc23214fccbd548cfde835159bf17de
+  version: 419edd5c2a58d8363d825bd22c1c2304cb57539b
   subpackages:
   - '...'
   - columns

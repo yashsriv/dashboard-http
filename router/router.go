@@ -20,4 +20,7 @@ func DashboardRoute() {
 	timetable.Post("/add", controllers.AddToTimeTable)
 	timetable.Get("/get", controllers.GetFromTimeTable)
 
+	weather := iris.Party("/weather")
+	weather.Get("/", controllers.WeatherController)
+
 }

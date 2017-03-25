@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 
+	"github.com/go-redis/redis"
 	"github.com/markbates/pop"
 	"github.com/olebedev/config"
 	"github.com/ybbus/jsonrpc"
@@ -16,6 +17,11 @@ var CookieSecret string
 
 // DatabaseConnection for all database tasks
 var DatabaseConnection *pop.Connection
+
+// RedisConnection
+var RedisConnection *redis.Client
+
+var WeatherApiKey string
 
 // FacebookAccessToken is the secret app access token
 var FacebookAccessToken string
@@ -54,6 +60,33 @@ func InitConfig() {
 	}
 
 	DatabaseConnection, err = pop.Connect(database)
+	if err != nil {
+		panic(err)
+	}
+
+	redisHost, err := cfg.String("redis.host")
+	if err != nil {
+		panic(err)
+	}
+	redisPort, err := cfg.String("redis.port")
+	if err != nil {
+		panic(err)
+	}
+	redisPassword, err := cfg.String("redis.password")
+	if err != nil {
+		panic(err)
+	}
+	redisDB, err := cfg.Int("redis.db")
+	if err != nil {
+		panic(err)
+	}
+	RedisConnection = redis.NewClient(&redis.Options{
+		Addr:     fmt.Sprintf("%s:%s", redisHost, redisPort),
+		Password: redisPassword, // no password set
+		DB:       redisDB,       // use default DB
+	})
+
+	WeatherApiKey, err = cfg.String("weather.key")
 	if err != nil {
 		panic(err)
 	}

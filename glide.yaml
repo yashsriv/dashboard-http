@@ -20,3 +20,5 @@ import:
   subpackages:
   - '...'
 - package: github.com/ybbus/jsonrpc
+- package: github.com/go-redis/redis
+  version: ^6.0.0
